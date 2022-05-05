@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "859383466140",
+    "project_id": "fitly-test",
+    "storage_bucket": "fitly-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859383466140:android:aaa4c0fee80b6d48f70559",
+        "android_client_info": {
+          "package_name": "com.flutterflow.fitly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859383466140-q3qvl3gldr954po4ep8msj95qvdo703f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflow.fitly",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "859383466140-n83m3qb9t5kbai8p1r7orimqc5i2hmng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn30wVHehIowjMEHb5h4q7jRCkV8zs34Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859383466140-n83m3qb9t5kbai8p1r7orimqc5i2hmng.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "859383466140-moub50jo5sjggskgo90d0p0j1duaoepf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.fitly"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
