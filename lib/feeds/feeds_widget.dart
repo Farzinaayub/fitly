@@ -52,7 +52,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                 children: [
                   Expanded(
                     child: Text(
-                      '@farzinapm',
+                      '@farzinapa',
                       style: FlutterFlowTheme.of(context).title2.override(
                             fontFamily: 'Lexend Deca',
                             color: Color(0xFF090F13),

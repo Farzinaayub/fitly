@@ -1,9 +1,11 @@
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/userstable_record.dart';
+import 'schema/calorietable_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -12,6 +14,7 @@ export 'schema/index.dart';
 export 'schema/serializers.dart';
 
 export 'schema/userstable_record.dart';
+export 'schema/calorietable_record.dart';
 
 /// Functions to query UserstableRecords (as a Stream and as a Future).
 Stream<List<UserstableRecord>> queryUserstableRecord(
@@ -38,6 +41,38 @@ Future<FFFirestorePage<UserstableRecord>> queryUserstableRecordPage({
     queryCollectionPage(
       UserstableRecord.collection,
       UserstableRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query CalorietableRecords (as a Stream and as a Future).
+Stream<List<CalorietableRecord>> queryCalorietableRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(
+        CalorietableRecord.collection, CalorietableRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<CalorietableRecord>> queryCalorietableRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(
+        CalorietableRecord.collection, CalorietableRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<FFFirestorePage<CalorietableRecord>> queryCalorietableRecordPage({
+  Query Function(Query) queryBuilder,
+  DocumentSnapshot nextPageMarker,
+  int pageSize,
+  bool isStream,
+}) =>
+    queryCollectionPage(
+      CalorietableRecord.collection,
+      CalorietableRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,

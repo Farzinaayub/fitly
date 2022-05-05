@@ -42,10 +42,10 @@ abstract class UserstableRecord
   String get agecat;
 
   @nullable
-  int get pasword;
+  String get objective;
 
   @nullable
-  String get objective;
+  String get password;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -61,8 +61,8 @@ abstract class UserstableRecord
     ..propic = ''
     ..gender = ''
     ..agecat = ''
-    ..pasword = 0
-    ..objective = '';
+    ..objective = ''
+    ..password = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('userstable');
@@ -95,8 +95,8 @@ Map<String, dynamic> createUserstableRecordData({
   String propic,
   String gender,
   String agecat,
-  int pasword,
   String objective,
+  String password,
 }) =>
     serializers.toFirestore(
         UserstableRecord.serializer,
@@ -110,5 +110,5 @@ Map<String, dynamic> createUserstableRecordData({
           ..propic = propic
           ..gender = gender
           ..agecat = agecat
-          ..pasword = pasword
-          ..objective = objective));
+          ..objective = objective
+          ..password = password));

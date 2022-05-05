@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -10,7 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Login1Widget extends StatefulWidget {
-  const Login1Widget({Key key}) : super(key: key);
+  const Login1Widget({
+    Key key,
+    this.mailid,
+    this.pwd,
+  }) : super(key: key);
+
+  final String mailid;
+  final String pwd;
 
   @override
   _Login1WidgetState createState() => _Login1WidgetState();
@@ -748,6 +756,9 @@ class _Login1WidgetState extends State<Login1Widget>
                                                               .text,
                                                           objective:
                                                               objectiveValue,
+                                                          mail: widget.mailid,
+                                                          propic: '',
+                                                          password: widget.pwd,
                                                         );
                                                         await UserstableRecord
                                                             .collection

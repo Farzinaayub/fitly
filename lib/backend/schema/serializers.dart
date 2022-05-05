@@ -1,6 +1,7 @@
 import 'package:built_value/standard_json_plugin.dart';
 
 import 'userstable_record.dart';
+import 'calorietable_record.dart';
 
 import 'index.dart';
 
@@ -12,6 +13,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
 
 @SerializersFor(const [
   UserstableRecord,
+  CalorietableRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

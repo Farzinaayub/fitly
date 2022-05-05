@@ -1,9 +1,9 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login1/login1_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -429,6 +429,8 @@ class _LogoWidgetState extends State<LogoWidget> {
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.normal,
                                                 ),
+                                            keyboardType:
+                                                TextInputType.emailAddress,
                                           ),
                                         ),
                                         Padding(
@@ -506,6 +508,8 @@ class _LogoWidgetState extends State<LogoWidget> {
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.normal,
                                                 ),
+                                            keyboardType:
+                                                TextInputType.visiblePassword,
                                           ),
                                         ),
                                         Padding(
@@ -618,26 +622,43 @@ class _LogoWidgetState extends State<LogoWidget> {
                                                   snapshot.data;
                                               return FFButtonWidget(
                                                 onPressed: () async {
-                                                  final userstableCreateData =
-                                                      createUserstableRecordData(
-                                                    mail: emailAddressController
-                                                        .text,
-                                                    pasword: int.parse(
-                                                        passwordController
-                                                            .text),
-                                                  );
-                                                  await UserstableRecord
-                                                      .collection
-                                                      .doc()
-                                                      .set(
-                                                          userstableCreateData);
                                                   await Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          Login1Widget(),
+                                                          Login1Widget(
+                                                        mailid:
+                                                            emailAddressController
+                                                                .text,
+                                                        pwd: passwordController
+                                                            .text,
+                                                      ),
                                                     ),
                                                   );
+                                                  if (passwordController.text !=
+                                                      passwordConfirmController
+                                                          .text) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          'Passwords don\'t match!',
+                                                        ),
+                                                      ),
+                                                    );
+                                                    return;
+                                                  }
+
+                                                  final user =
+                                                      await createAccountWithEmail(
+                                                    context,
+                                                    emailAddressController.text,
+                                                    passwordController.text,
+                                                  );
+                                                  if (user == null) {
+                                                    return;
+                                                  }
                                                 },
                                                 text: 'Create Account',
                                                 options: FFButtonOptions(

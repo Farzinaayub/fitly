@@ -6,3 +6,6 @@ export 'recall/recall_widget.dart' show RecallWidget;
 export 'post/post_widget.dart' show PostWidget;
 export 'forget/forget_widget.dart' show ForgetWidget;
 export 'feeds/feeds_widget.dart' show FeedsWidget;
+export 'profilepage/profilepage_widget.dart' show ProfilepageWidget;
+export 'profilepage_copy/profilepage_copy_widget.dart'
+    show ProfilepageCopyWidget;
