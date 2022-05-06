@@ -12,18 +12,21 @@ abstract class CalorietableRecord
       _$calorietableRecordSerializer;
 
   @nullable
-  String get food;
+  int get calorie;
 
   @nullable
-  int get calorie;
+  String get username;
+
+  @nullable
+  DateTime get timestamp;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(CalorietableRecordBuilder builder) => builder
-    ..food = ''
-    ..calorie = 0;
+    ..calorie = 0
+    ..username = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('calorietable');
@@ -48,11 +51,13 @@ abstract class CalorietableRecord
 }
 
 Map<String, dynamic> createCalorietableRecordData({
-  String food,
   int calorie,
+  String username,
+  DateTime timestamp,
 }) =>
     serializers.toFirestore(
         CalorietableRecord.serializer,
         CalorietableRecord((c) => c
-          ..food = food
-          ..calorie = calorie));
+          ..calorie = calorie
+          ..username = username
+          ..timestamp = timestamp));

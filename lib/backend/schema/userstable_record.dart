@@ -12,40 +12,53 @@ abstract class UserstableRecord
       _$userstableRecordSerializer;
 
   @nullable
-  @BuiltValueField(wireName: 'NAME')
   String get name;
 
   @nullable
-  @BuiltValueField(wireName: 'USERNAME')
   String get username;
 
   @nullable
-  @BuiltValueField(wireName: 'MAIL')
-  String get mail;
+  String get password;
 
   @nullable
-  double get height;
+  int get age;
+
+  @nullable
+  int get height;
 
   @nullable
   int get weight;
 
   @nullable
-  int get phone;
+  String get phonenumber;
 
   @nullable
-  String get propic;
-
-  @nullable
-  String get gender;
-
-  @nullable
-  String get agecat;
+  String get disability;
 
   @nullable
   String get objective;
 
   @nullable
-  String get password;
+  String get email;
+
+  @nullable
+  @BuiltValueField(wireName: 'display_name')
+  String get displayName;
+
+  @nullable
+  @BuiltValueField(wireName: 'photo_url')
+  String get photoUrl;
+
+  @nullable
+  String get uid;
+
+  @nullable
+  @BuiltValueField(wireName: 'created_time')
+  DateTime get createdTime;
+
+  @nullable
+  @BuiltValueField(wireName: 'phone_number')
+  String get phoneNumber;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -54,15 +67,18 @@ abstract class UserstableRecord
   static void _initializeBuilder(UserstableRecordBuilder builder) => builder
     ..name = ''
     ..username = ''
-    ..mail = ''
-    ..height = 0.0
+    ..password = ''
+    ..age = 0
+    ..height = 0
     ..weight = 0
-    ..phone = 0
-    ..propic = ''
-    ..gender = ''
-    ..agecat = ''
+    ..phonenumber = ''
+    ..disability = ''
     ..objective = ''
-    ..password = '';
+    ..email = ''
+    ..displayName = ''
+    ..photoUrl = ''
+    ..uid = ''
+    ..phoneNumber = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('userstable');
@@ -88,27 +104,35 @@ abstract class UserstableRecord
 Map<String, dynamic> createUserstableRecordData({
   String name,
   String username,
-  String mail,
-  double height,
-  int weight,
-  int phone,
-  String propic,
-  String gender,
-  String agecat,
-  String objective,
   String password,
+  int age,
+  int height,
+  int weight,
+  String phonenumber,
+  String disability,
+  String objective,
+  String email,
+  String displayName,
+  String photoUrl,
+  String uid,
+  DateTime createdTime,
+  String phoneNumber,
 }) =>
     serializers.toFirestore(
         UserstableRecord.serializer,
         UserstableRecord((u) => u
           ..name = name
           ..username = username
-          ..mail = mail
+          ..password = password
+          ..age = age
           ..height = height
           ..weight = weight
-          ..phone = phone
-          ..propic = propic
-          ..gender = gender
-          ..agecat = agecat
+          ..phonenumber = phonenumber
+          ..disability = disability
           ..objective = objective
-          ..password = password));
+          ..email = email
+          ..displayName = displayName
+          ..photoUrl = photoUrl
+          ..uid = uid
+          ..createdTime = createdTime
+          ..phoneNumber = phoneNumber));

@@ -2,17 +2,15 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
-import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../profile/profile_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Login1Widget extends StatefulWidget {
-  const Login1Widget({
+class EditdetailsWidget extends StatefulWidget {
+  const EditdetailsWidget({
     Key key,
     this.mailid,
     this.pwd,
@@ -22,20 +20,18 @@ class Login1Widget extends StatefulWidget {
   final String pwd;
 
   @override
-  _Login1WidgetState createState() => _Login1WidgetState();
+  _EditdetailsWidgetState createState() => _EditdetailsWidgetState();
 }
 
-class _Login1WidgetState extends State<Login1Widget>
+class _EditdetailsWidgetState extends State<EditdetailsWidget>
     with TickerProviderStateMixin {
-  String radioButtonValue1;
-  String radioButtonValue2;
+  String disabilityValue;
   TextEditingController ageController;
   TextEditingController nameController;
   TextEditingController usernameController;
   TextEditingController phonenumberController;
   TextEditingController heightController;
   TextEditingController weightController;
-  String disabilityValue;
   String objectiveValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
@@ -77,7 +73,7 @@ class _Login1WidgetState extends State<Login1Widget>
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0x00F7F6FF),
+      backgroundColor: FlutterFlowTheme.of(context).primaryBtnText,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Column(
@@ -93,7 +89,7 @@ class _Login1WidgetState extends State<Login1Widget>
                     image: DecorationImage(
                       fit: BoxFit.fitHeight,
                       image: Image.asset(
-                        'assets/images/fitness-hero-1920x1080.png',
+                        'assets/images/xbreak-workout_602724.jpg.pagespeed.ic.v8byD7su-e.jpg',
                       ).image,
                     ),
                   ),
@@ -118,7 +114,7 @@ class _Login1WidgetState extends State<Login1Widget>
                                   indicatorColor: Colors.white,
                                   tabs: [
                                     Tab(
-                                      text: 'Personal Details',
+                                      text: 'Edit details',
                                     ),
                                   ],
                                 ),
@@ -417,87 +413,6 @@ class _Login1WidgetState extends State<Login1Widget>
                                               ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 20, 0, 0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceAround,
-                                                  children: [
-                                                    FlutterFlowRadioButton(
-                                                      options:
-                                                          ['male'].toList(),
-                                                      onChanged: (value) {
-                                                        setState(() =>
-                                                            radioButtonValue1 =
-                                                                value);
-                                                      },
-                                                      optionHeight: 25,
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                      buttonPosition:
-                                                          RadioButtonPosition
-                                                              .left,
-                                                      direction: Axis.vertical,
-                                                      radioButtonColor:
-                                                          Colors.blue,
-                                                      inactiveRadioButtonColor:
-                                                          Color(0x8A000000),
-                                                      toggleable: false,
-                                                      horizontalAlignment:
-                                                          WrapAlignment.start,
-                                                      verticalAlignment:
-                                                          WrapCrossAlignment
-                                                              .start,
-                                                    ),
-                                                    FlutterFlowRadioButton(
-                                                      options:
-                                                          ['female'].toList(),
-                                                      onChanged: (value) {
-                                                        setState(() =>
-                                                            radioButtonValue2 =
-                                                                value);
-                                                      },
-                                                      optionHeight: 25,
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                      buttonPosition:
-                                                          RadioButtonPosition
-                                                              .left,
-                                                      direction: Axis.vertical,
-                                                      radioButtonColor:
-                                                          Colors.white,
-                                                      inactiveRadioButtonColor:
-                                                          Color(0x8A000000),
-                                                      toggleable: false,
-                                                      horizontalAlignment:
-                                                          WrapAlignment.start,
-                                                      verticalAlignment:
-                                                          WrapCrossAlignment
-                                                              .start,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(20, 20, 20, 0),
                                                 child: TextFormField(
                                                   controller: heightController,
@@ -708,9 +623,8 @@ class _Login1WidgetState extends State<Login1Widget>
                                                     .fromSTEB(0, 24, 0, 0),
                                                 child: StreamBuilder<
                                                     List<UserstableRecord>>(
-                                                  stream: queryUserstableRecord(
-                                                    singleRecord: true,
-                                                  ),
+                                                  stream:
+                                                      queryUserstableRecord(),
                                                   builder: (context, snapshot) {
                                                     // Customize what your widget looks like when it's loading.
                                                     if (!snapshot.hasData) {
@@ -730,50 +644,15 @@ class _Login1WidgetState extends State<Login1Widget>
                                                     List<UserstableRecord>
                                                         buttonLoginUserstableRecordList =
                                                         snapshot.data;
-                                                    final buttonLoginUserstableRecord =
-                                                        buttonLoginUserstableRecordList
-                                                                .isNotEmpty
-                                                            ? buttonLoginUserstableRecordList
-                                                                .first
-                                                            : null;
                                                     return FFButtonWidget(
                                                       onPressed: () async {
                                                         final userstableUpdateData =
-                                                            createUserstableRecordData(
-                                                          name: nameController
-                                                              .text,
-                                                          username:
-                                                              usernameController
-                                                                  .text,
-                                                          age: int.parse(
-                                                              ageController
-                                                                  .text),
-                                                          height: int.parse(
-                                                              heightController
-                                                                  .text),
-                                                          weight: int.parse(
-                                                              weightController
-                                                                  .text),
-                                                          phonenumber:
-                                                              phonenumberController
-                                                                  .text,
-                                                          disability:
-                                                              disabilityValue,
-                                                          objective:
-                                                              objectiveValue,
-                                                        );
+                                                            createUserstableRecordData();
                                                         await currentUserReference
                                                             .update(
                                                                 userstableUpdateData);
-                                                        await Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                ProfileWidget(),
-                                                          ),
-                                                        );
                                                       },
-                                                      text: 'Complete',
+                                                      text: 'Save Changes',
                                                       options: FFButtonOptions(
                                                         width: 150,
                                                         height: 40,

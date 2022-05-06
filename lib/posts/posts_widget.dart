@@ -1,27 +1,31 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_place_picker.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/place.dart';
+import '../flutter_flow/upload_media.dart';
+import '../profile/profile_widget.dart';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PostWidget extends StatefulWidget {
-  const PostWidget({Key key}) : super(key: key);
+class PostsWidget extends StatefulWidget {
+  const PostsWidget({Key key}) : super(key: key);
 
   @override
-  _PostWidgetState createState() => _PostWidgetState();
+  _PostsWidgetState createState() => _PostsWidgetState();
 }
 
-class _PostWidgetState extends State<PostWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  var placePickerValue = FFPlace();
+class _PostsWidgetState extends State<PostsWidget> {
+  String uploadedFileUrl = '';
   TextEditingController textController;
+  var placePickerValue = FFPlace();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -84,19 +88,66 @@ class _PostWidgetState extends State<PostWidget> {
                     children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.96,
-                          height: 350,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFF1F4F8),
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 6,
-                                color: Color(0x3A000000),
-                                offset: Offset(0, 2),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(8),
+                        child: InkWell(
+                          onTap: () async {
+                            final selectedMedia =
+                                await selectMediaWithSourceBottomSheet(
+                              context: context,
+                              allowPhoto: true,
+                            );
+                            if (selectedMedia != null &&
+                                selectedMedia.every((m) => validateFileFormat(
+                                    m.storagePath, context))) {
+                              showUploadMessage(
+                                context,
+                                'Uploading file...',
+                                showLoading: true,
+                              );
+                              final downloadUrls = (await Future.wait(
+                                      selectedMedia.map((m) async =>
+                                          await uploadData(
+                                              m.storagePath, m.bytes))))
+                                  .where((u) => u != null)
+                                  .toList();
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                              if (downloadUrls != null &&
+                                  downloadUrls.length == selectedMedia.length) {
+                                setState(
+                                    () => uploadedFileUrl = downloadUrls.first);
+                                showUploadMessage(
+                                  context,
+                                  'Success!',
+                                );
+                              } else {
+                                showUploadMessage(
+                                  context,
+                                  'Failed to upload media',
+                                );
+                                return;
+                              }
+                            }
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.96,
+                            height: 350,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF1F4F8),
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: Image.asset(
+                                  'assets/images/emptyState@2x.png',
+                                ).image,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 6,
+                                  color: Color(0x3A000000),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                         ),
                       ),
@@ -141,7 +192,7 @@ class _PostWidgetState extends State<PostWidget> {
                                     .bodyText1
                                     .override(
                                       fontFamily: 'Lexend Deca',
-                                      color: Color(0xFF040B0F),
+                                      color: Color(0xFF090F13),
                                       fontSize: 14,
                                       fontWeight: FontWeight.normal,
                                     ),
@@ -195,14 +246,20 @@ class _PostWidgetState extends State<PostWidget> {
               onPressed: () async {
                 final postsTableCreateData = createPostsTableRecordData(
                   username: currentUserDocument?.username,
-                  picture: textController.text,
-                  location: '',
+                  location: placePickerValue.city,
                   timestamp: getCurrentTimestamp,
                   post: textController.text,
+                  picture: uploadedFileUrl,
                 );
                 await PostsTableRecord.collection
                     .doc()
                     .set(postsTableCreateData);
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileWidget(),
+                  ),
+                );
               },
               text: 'Create Post',
               options: FFButtonOptions(

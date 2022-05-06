@@ -4,7 +4,9 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login1/login1_widget.dart';
+import '../profile/profile_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LogoWidget extends StatefulWidget {
@@ -28,6 +30,26 @@ class _LogoWidgetState extends State<LogoWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      final user = await signInWithEmail(
+        context,
+        emailAddressLoginController.text,
+        passwordLoginController.text,
+      );
+      if (user == null) {
+        return;
+      }
+
+      await Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfileWidget(),
+        ),
+        (r) => false,
+      );
+    });
+
     emailAddressController = TextEditingController();
     passwordController = TextEditingController();
     passwordVisibility = false;
@@ -294,9 +316,26 @@ class _LogoWidgetState extends State<LogoWidget> {
                                                   buttonLoginUserstableRecordList =
                                                   snapshot.data;
                                               return FFButtonWidget(
-                                                onPressed: () {
-                                                  print(
-                                                      'Button-Login pressed ...');
+                                                onPressed: () async {
+                                                  final user =
+                                                      await signInWithEmail(
+                                                    context,
+                                                    emailAddressLoginController
+                                                        .text,
+                                                    passwordLoginController
+                                                        .text,
+                                                  );
+                                                  if (user == null) {
+                                                    return;
+                                                  }
+
+                                                  await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ProfileWidget(),
+                                                    ),
+                                                  );
                                                 },
                                                 text: 'Login',
                                                 options: FFButtonOptions(
@@ -599,7 +638,9 @@ class _LogoWidgetState extends State<LogoWidget> {
                                                   0, 24, 0, 0),
                                           child: StreamBuilder<
                                               List<UserstableRecord>>(
-                                            stream: queryUserstableRecord(),
+                                            stream: queryUserstableRecord(
+                                              singleRecord: true,
+                                            ),
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
                                               if (!snapshot.hasData) {
@@ -620,21 +661,14 @@ class _LogoWidgetState extends State<LogoWidget> {
                                               List<UserstableRecord>
                                                   buttonUserstableRecordList =
                                                   snapshot.data;
+                                              final buttonUserstableRecord =
+                                                  buttonUserstableRecordList
+                                                          .isNotEmpty
+                                                      ? buttonUserstableRecordList
+                                                          .first
+                                                      : null;
                                               return FFButtonWidget(
                                                 onPressed: () async {
-                                                  await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Login1Widget(
-                                                        mailid:
-                                                            emailAddressController
-                                                                .text,
-                                                        pwd: passwordController
-                                                            .text,
-                                                      ),
-                                                    ),
-                                                  );
                                                   if (passwordController.text !=
                                                       passwordConfirmController
                                                           .text) {
@@ -659,6 +693,34 @@ class _LogoWidgetState extends State<LogoWidget> {
                                                   if (user == null) {
                                                     return;
                                                   }
+
+                                                  final userstableCreateData =
+                                                      createUserstableRecordData(
+                                                    email:
+                                                        emailAddressController
+                                                            .text,
+                                                    password:
+                                                        passwordController.text,
+                                                  );
+                                                  await UserstableRecord
+                                                      .collection
+                                                      .doc(user.uid)
+                                                      .update(
+                                                          userstableCreateData);
+
+                                                  await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Login1Widget(
+                                                        mailid:
+                                                            emailAddressController
+                                                                .text,
+                                                        pwd: passwordController
+                                                            .text,
+                                                      ),
+                                                    ),
+                                                  );
                                                 },
                                                 text: 'Create Account',
                                                 options: FFButtonOptions(
