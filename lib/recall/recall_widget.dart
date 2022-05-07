@@ -65,7 +65,7 @@ class _RecallWidgetState extends State<RecallWidget> {
               backgroundColor: Color(0xFFC4FCA3),
               automaticallyImplyLeading: false,
               flexibleSpace: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(35, 25, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(35, 40, 0, 0),
                 child: Text(
                   'LET\'S RECALL THE DAY',
                   style: FlutterFlowTheme.of(context).title1.override(

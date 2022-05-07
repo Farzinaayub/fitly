@@ -40,10 +40,15 @@ class _ChestWidgetState extends State<ChestWidget> {
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Icon(
-                      Icons.chevron_left_sharp,
-                      color: Colors.black,
-                      size: 24,
+                    InkWell(
+                      onTap: () async {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.chevron_left_sharp,
+                        color: Colors.black,
+                        size: 24,
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(14, 0, 0, 0),

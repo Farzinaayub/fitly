@@ -21,3 +21,7 @@ export 'tricepsdips/tricepsdips_widget.dart' show TricepsdipsWidget;
 export 'arm/arm_widget.dart' show ArmWidget;
 export 'leg/leg_widget.dart' show LegWidget;
 export 'posts/posts_widget.dart' show PostsWidget;
+export 'new_feed/new_feed_widget.dart' show NewFeedWidget;
+export 'begi/begi_widget.dart' show BegiWidget;
+export 'starting/starting_widget.dart' show StartingWidget;
+export 'choice/choice_widget.dart' show ChoiceWidget;

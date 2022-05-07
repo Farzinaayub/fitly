@@ -523,6 +523,7 @@ class _BeginnerWidgetState extends State<BeginnerWidget> {
                                 height: 100,
                                 decoration: BoxDecoration(
                                   color: Color(0xFFEEEEEE),
+                                  shape: BoxShape.rectangle,
                                 ),
                               ),
                               Container(

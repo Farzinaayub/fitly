@@ -87,8 +87,8 @@ class _MyAppState extends State<MyApp> {
               ),
             )
           : currentUser.loggedIn
-              ? ProfileWidget()
-              : LogoWidget(),
+              ? LogoWidget()
+              : StartingWidget(),
     );
   }
 }

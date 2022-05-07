@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -5,6 +6,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../login1/login1_widget.dart';
 import '../recall/recall_widget.dart';
+import '../starting/starting_widget.dart';
 import '../targetpage/targetpage_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -33,22 +35,22 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(10, 20, 10, 0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(2, 10, 0, 10),
                     child: Text(
                       'PROFILE',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            fontSize: 20,
+                            fontSize: 25,
                           ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(150, 20, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(140, 0, 10, 0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         await Navigator.push(
@@ -300,8 +302,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
               child: FFButtonWidget(
-                onPressed: () {
-                  print('Button pressed ...');
+                onPressed: () async {
+                  await signOut();
+                  await Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StartingWidget(),
+                    ),
+                    (r) => false,
+                  );
                 },
                 text: 'Log Out',
                 options: FFButtonOptions(

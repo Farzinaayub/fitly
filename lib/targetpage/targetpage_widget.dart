@@ -1,7 +1,8 @@
-import '../bodybuilding/bodybuilding_widget.dart';
+import '../begi/begi_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../intermediate/intermediate_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -50,38 +51,72 @@ class _TargetpageWidgetState extends State<TargetpageWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(60, 70, 0, 0),
-              child: InkWell(
-                onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BodybuildingWidget(),
-                    ),
-                  );
-                },
-                child: Container(
-                  width: 330,
-                  height: 180,
-                  decoration: BoxDecoration(
-                    color: Color(0x8A4B39EF),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(25, 69, 0, 0),
-                    child: Text(
-                      'BODY BUILDING',
-                      style: FlutterFlowTheme.of(context).title1.override(
-                            fontFamily: 'Roboto',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                          ),
-                    ),
+              padding: EdgeInsetsDirectional.fromSTEB(40, 30, 0, 0),
+              child: Container(
+                width: 330,
+                height: 180,
+                decoration: BoxDecoration(
+                  color: Color(0x8A4B39EF),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(25, 69, 0, 0),
+                  child: Text(
+                    'BODY BUILDING',
+                    style: FlutterFlowTheme.of(context).title1.override(
+                          fontFamily: 'Roboto',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                        ),
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(60, 50, 0, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+              child: Text(
+                'BEGGINER',
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+            ),
+            InkWell(
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BegiWidget(),
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.double_arrow,
+                color: Colors.black,
+                size: 50,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+              child: Text(
+                'INTERMEDIATE',
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+            ),
+            InkWell(
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => IntermediateWidget(),
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.double_arrow,
+                color: Colors.black,
+                size: 50,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(40, 30, 0, 0),
               child: Container(
                 width: 330,
                 height: 180,
@@ -99,6 +134,24 @@ class _TargetpageWidgetState extends State<TargetpageWidget> {
                   ),
                 ),
               ),
+            ),
+            Text(
+              'BEGINNER',
+              style: FlutterFlowTheme.of(context).bodyText1,
+            ),
+            Icon(
+              Icons.double_arrow,
+              color: Colors.black,
+              size: 50,
+            ),
+            Text(
+              'Hello World',
+              style: FlutterFlowTheme.of(context).bodyText1,
+            ),
+            Icon(
+              Icons.double_arrow,
+              color: Colors.black,
+              size: 50,
             ),
           ],
         ),

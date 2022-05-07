@@ -44,7 +44,7 @@ class _LogoWidgetState extends State<LogoWidget> {
       await Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => ProfileWidget(),
+          builder: (context) => LogoWidget(),
         ),
         (r) => false,
       );
