@@ -73,7 +73,7 @@ class _WorkoutscheduleWidgetState extends State<WorkoutscheduleWidget> {
                             audio: Audio(
                               'assets/audios/tunetank.com_1884_energy-sport_by_rocknstock.mp3',
                               metas: Metas(
-                                id: 'tunetank.com_1884_energy-sport_by_rocknstock.mp3-rmktbrjm',
+                                id: 'tunetank.com_1884_energy-sport_by_rocknstock.mp3-zqqezh8h',
                                 title: 'Freedom',
                               ),
                             ),
@@ -118,7 +118,7 @@ class _WorkoutscheduleWidgetState extends State<WorkoutscheduleWidget> {
                             audio: Audio(
                               'assets/audios/tunetank.com_1884_energy-sport_by_rocknstock.mp3',
                               metas: Metas(
-                                id: 'tunetank.com_1884_energy-sport_by_rocknstock.mp3-bav1xolj',
+                                id: 'tunetank.com_1884_energy-sport_by_rocknstock.mp3-b2yvpx3l',
                                 title: 'Freedom',
                               ),
                             ),
@@ -162,7 +162,7 @@ class _WorkoutscheduleWidgetState extends State<WorkoutscheduleWidget> {
                             audio: Audio(
                               'assets/audios/tunetank.com_1884_energy-sport_by_rocknstock.mp3',
                               metas: Metas(
-                                id: 'tunetank.com_1884_energy-sport_by_rocknstock.mp3-ms3xvw0f',
+                                id: 'tunetank.com_1884_energy-sport_by_rocknstock.mp3-anh96ain',
                                 title: 'Freedom',
                               ),
                             ),

@@ -1,8 +1,10 @@
+import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,6 +17,8 @@ class PushupsWidget extends StatefulWidget {
 
 class _PushupsWidgetState extends State<PushupsWidget>
     with TickerProviderStateMixin {
+  String uploadedFileUrl = '';
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
     'buttonOnActionTriggerAnimation': AnimationInfo(
       trigger: AnimationTrigger.onActionTrigger,
@@ -31,7 +35,6 @@ class _PushupsWidgetState extends State<PushupsWidget>
       ),
     ),
   };
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -139,8 +142,31 @@ class _PushupsWidgetState extends State<PushupsWidget>
             ),
           ),
           FFButtonWidget(
-            onPressed: () {
-              print('Button-Login pressed ...');
+            onPressed: () async {
+              final selectedFile = await selectFile(allowedExtensions: ['pdf']);
+              if (selectedFile != null) {
+                showUploadMessage(
+                  context,
+                  'Uploading file...',
+                  showLoading: true,
+                );
+                final downloadUrl = await uploadData(
+                    selectedFile.storagePath, selectedFile.bytes);
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                if (downloadUrl != null) {
+                  setState(() => uploadedFileUrl = downloadUrl);
+                  showUploadMessage(
+                    context,
+                    'Success!',
+                  );
+                } else {
+                  showUploadMessage(
+                    context,
+                    'Failed to upload file',
+                  );
+                  return;
+                }
+              }
             },
             text: 'START',
             options: FFButtonOptions(
